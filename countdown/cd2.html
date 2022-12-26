@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <style>
+      body {
+        background-color: #333;
+        color: rgb(108, 110, 146);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+      
+      .countdown {
+        z-index: 1000;
+        font-size: 50px;
+        text-align: center;
+        width: fit-content;
+        animation: countdown 3s linear infinite;
+      }
+      
+      @keyframes countdown {
+        0% {
+          transform: scale(1.7);
+        }
+        50% {
+          transform: scale(1.4);
+        }
+        100% {
+          transform: scale(1.7);
+        }
+      }
+      .dbtn{
+        margin-bottom: 90px;
+        z-index: 2000;
+        width: 130px;
+        height: 70px;
+        background: rgb(124, 112, 112);
+        border-radius: 20%;
+        box-shadow: 0 9px rgb(36, 35, 35);
+        transition: ease 0.4s;
+        font-size: 30px;
+        color: rgb(70, 81, 90);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .dbtn:hover{
+        transform: translate(5px,-5px) scale(1.1);
+        background: rgb(187, 168, 168);
+        animation: linear infinite;
+        cursor: pointer;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="dbtn" onclick="countDown()">
+        START
+    </div>
+    <div class="countdown" style="visibility: hidden;">10</div>
+    <script>
+      const jsConfetti = new JSConfetti();
+      const countdown = document.querySelector('.countdown');
+      const dbtn=document.querySelector('.dbtn');
+      function countDown() {
+        dbtn.textContent="KLEV";
+        document.querySelector('.countdown').style.visibility="visible";
+        let count = parseInt(countdown.textContent);
+        if (count > 0) {
+          countdown.textContent = count - 1;
+          setTimeout(countDown, 1000);
+        } else {
+          jsConfetti.addConfetti();
+          let audio =new Audio("ABBA_Happy-New-Year.mp3");
+          audio.play();
+          countdown.textContent = "Happy New Year!";
+        }
+    }
+    </script>
+  </body>
+</html>
